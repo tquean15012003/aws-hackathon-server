@@ -7,7 +7,7 @@ app.use(cors());
 
 const server = http.createServer(app);
 
-const domains = ["http://localhost:3000"]
+const domains = ["http://localhost:3000", "http://10.91.232.96:3000"]
 
 const io = new Server(server, {
   cors: {
