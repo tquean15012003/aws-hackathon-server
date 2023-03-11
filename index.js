@@ -7,11 +7,9 @@ app.use(cors());
 
 const server = http.createServer(app);
 
-const domains = ["http://localhost:3000", "http://aws-hackathon-frontend.s3-website-ap-southeast-1.amazonaws.com"]
-
 const io = new Server(server, {
   cors: {
-    origin: domains,
+    origin: '*',
     methods: ["GET", "POST", "DELETE", "PUT"],
   },
 });
