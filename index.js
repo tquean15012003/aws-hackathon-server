@@ -21,7 +21,7 @@ io.on("connection", (socket) => {
 
   socket.on("join_room", async (room) => {
     await socket.join(room);
-    // socket.emit('hello', messageList)
+    socket.to(1).emit('join', {})
     // console.log(messageList)
     console.log(`User with ID: ${socket.id} joined room: ${room}`);
   });
@@ -32,6 +32,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
+    socket.to(1).emit("leave", {});
     console.log("User Disconnected", socket.id);
   });
 });
