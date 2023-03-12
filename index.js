@@ -7,6 +7,8 @@ app.use(cors());
 
 const server = http.createServer(app);
 
+// const messageList = []
+
 const io = new Server(server, {
   cors: {
     origin: '*',
@@ -17,12 +19,15 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
-  socket.on("join_room", (data) => {
-    socket.join(data);
-    console.log(`User with ID: ${socket.id} joined room: ${data}`);
+  socket.on("join_room", async (room) => {
+    await socket.join(room);
+    // socket.emit('hello', messageList)
+    // console.log(messageList)
+    console.log(`User with ID: ${socket.id} joined room: ${room}`);
   });
 
   socket.on("send_message", (data) => {
+    // messageList.push(data)
     socket.to(data.room).emit("receive_message", data);
   });
 
